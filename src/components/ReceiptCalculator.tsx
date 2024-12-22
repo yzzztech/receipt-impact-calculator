@@ -94,9 +94,9 @@ export const ReceiptCalculator = () => {
           {trees !== null && (
             <div className="animate-fade-in space-y-4">
               <div className="p-5 bg-app-blue-light rounded-lg hover:shadow-md transition-shadow">
-                <div className="flex items-center justify-center gap-3 text-app-blue-dark">
-                  <TreeDeciduous className="h-6 w-6" />
-                  <p className="text-lg">
+                <div className="flex items-start gap-4 text-app-blue-dark">
+                  <TreeDeciduous className="h-8 w-8 mt-1 flex-shrink-0" />
+                  <p className="text-lg text-left">
                     <span className="font-semibold">
                       {trees === 0 ? "Less than 1" : formatNumber(trees)}
                     </span>{" "}
@@ -106,9 +106,9 @@ export const ReceiptCalculator = () => {
               </div>
 
               <div className="p-5 bg-app-blue-light rounded-lg hover:shadow-md transition-shadow">
-                <div className="flex items-center justify-center gap-3 text-app-blue-dark">
-                  <Gauge className="h-6 w-6" />
-                  <p className="text-lg">
+                <div className="flex items-start gap-4 text-app-blue-dark">
+                  <Gauge className="h-8 w-8 mt-1 flex-shrink-0" />
+                  <p className="text-lg text-left">
                     <span className="font-semibold">{formatNumber(co2!)}</span>{" "}
                     grams of CO2 emissions
                   </p>
@@ -116,9 +116,9 @@ export const ReceiptCalculator = () => {
               </div>
 
               <div className="p-5 bg-app-blue-light rounded-lg hover:shadow-md transition-shadow">
-                <div className="flex items-center justify-center gap-3 text-app-blue-dark">
-                  <Clock className="h-6 w-6" />
-                  <p className="text-lg">
+                <div className="flex items-start gap-4 text-app-blue-dark">
+                  <Clock className="h-8 w-8 mt-1 flex-shrink-0" />
+                  <p className="text-lg text-left">
                     <span className="font-semibold">{formatTime(timeWasted!)}</span>{" "}
                     wasted on transactions
                   </p>
