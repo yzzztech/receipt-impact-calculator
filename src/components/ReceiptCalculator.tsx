@@ -14,6 +14,7 @@ const RECEIPTS_PER_TREE = 8333;
 const CO2_PER_RECEIPT = 2.5; // grams of CO2 per receipt
 const SECONDS_PER_RECEIPT = 3; // seconds wasted per receipt transaction
 const GRAMS_PER_TON = 1000000; // 1 ton = 1,000,000 grams
+const GRAMS_PER_KG = 1000; // 1 kg = 1,000 grams
 const COST_PER_RECEIPT = 0.015; // $0.015 per receipt (includes paper, ink, and maintenance)
 
 interface Props {
@@ -23,18 +24,38 @@ interface Props {
 export const ReceiptCalculator = ({ language }: Props) => {
   const [receipts, setReceipts] = useState<string>("");
   const [trees, setTrees] = useState<number | null>(null);
-  const [co2, setCo2] = useState<number | null>(null);
+  const [co2, setCo2] = useState<{ value: number; unit: string } | null>(null);
   const [timeWasted, setTimeWasted] = useState<number | null>(null);
   const [cost, setCost] = useState<number | null>(null);
 
   const t = translations[language];
   const isArabic = language === 'ar';
 
+  const formatCO2 = (grams: number) => {
+    if (grams >= GRAMS_PER_TON) {
+      return {
+        value: Math.round(grams / GRAMS_PER_TON),
+        unit: t.co2TextTons
+      };
+    } else if (grams >= GRAMS_PER_KG) {
+      return {
+        value: Math.round(grams / GRAMS_PER_KG),
+        unit: t.co2TextKg
+      };
+    } else {
+      return {
+        value: Math.round(grams),
+        unit: t.co2TextGrams
+      };
+    }
+  };
+
   const calculateImpact = () => {
     const numReceipts = parseInt(receipts);
     if (!isNaN(numReceipts) && numReceipts > 0) {
       setTrees(Math.round(numReceipts / RECEIPTS_PER_TREE));
-      setCo2(Math.round((numReceipts * CO2_PER_RECEIPT) / GRAMS_PER_TON));
+      const totalCO2Grams = numReceipts * CO2_PER_RECEIPT;
+      setCo2(formatCO2(totalCO2Grams));
       setTimeWasted(Math.round(numReceipts * SECONDS_PER_RECEIPT));
       setCost(Math.round(numReceipts * COST_PER_RECEIPT));
     }
@@ -123,8 +144,8 @@ export const ReceiptCalculator = ({ language }: Props) => {
                 <div className="flex items-start gap-4 text-app-blue-dark">
                   <Gauge className="h-8 w-8 mt-1 flex-shrink-0" />
                   <p className="text-lg text-left">
-                    <span className="font-semibold">{formatNumber(co2!)}</span>{" "}
-                    {t.co2Text}
+                    <span className="font-semibold">{formatNumber(co2!.value)}</span>{" "}
+                    {co2!.unit}
                   </p>
                 </div>
               </div>
