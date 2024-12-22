@@ -26,7 +26,7 @@ export const ReceiptCalculator = () => {
     <div className="w-full max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg">
       <div className="space-y-4">
         <div className="text-center space-y-2">
-          <h1 className="text-2xl font-semibold text-eco-green-dark">
+          <h1 className="text-2xl font-semibold text-app-blue-dark">
             Receipt Impact
           </h1>
           <p className="text-sm text-neutral">
@@ -36,7 +36,7 @@ export const ReceiptCalculator = () => {
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-eco-green-dark flex items-center gap-2">
+            <label className="text-sm font-medium text-app-blue-dark flex items-center gap-2">
               Number of Receipts
               <TooltipProvider>
                 <Tooltip>
@@ -61,14 +61,14 @@ export const ReceiptCalculator = () => {
 
           <Button
             onClick={calculateTrees}
-            className="w-full bg-eco-green hover:bg-eco-green/90 text-white"
+            className="w-full bg-app-blue hover:bg-app-blue/90 text-white"
           >
             Calculate Impact
           </Button>
 
           {trees !== null && (
-            <div className="animate-fade-in p-4 bg-eco-green-light rounded-lg text-center">
-              <p className="text-eco-green-dark">
+            <div className="animate-fade-in p-4 bg-app-blue-light rounded-lg text-center">
+              <p className="text-app-blue-dark">
                 <span className="font-semibold">
                   {trees === 0 ? "Less than 1" : trees}
                 </span>{" "}

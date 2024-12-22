@@ -52,10 +52,10 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        "eco-green": {
-          light: "#F2FCE2",
-          DEFAULT: "#6B9E76",
-          dark: "#2F4435",
+        "app-blue": {
+          light: "#E6F3FF",
+          DEFAULT: "#1EAEDB",
+          dark: "#221F26",
         },
         neutral: "#8E9196",
       },
