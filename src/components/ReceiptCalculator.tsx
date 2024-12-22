@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { translations } from "@/utils/translations";
 
 const RECEIPTS_PER_TREE = 8333;
 const CO2_PER_RECEIPT = 2.5; // grams of CO2 per receipt
@@ -15,18 +16,24 @@ const SECONDS_PER_RECEIPT = 3; // seconds wasted per receipt transaction
 const GRAMS_PER_TON = 1000000; // 1 ton = 1,000,000 grams
 const COST_PER_RECEIPT = 0.015; // $0.015 per receipt (includes paper, ink, and maintenance)
 
-export const ReceiptCalculator = () => {
+interface Props {
+  language: 'en' | 'ar';
+}
+
+export const ReceiptCalculator = ({ language }: Props) => {
   const [receipts, setReceipts] = useState<string>("");
   const [trees, setTrees] = useState<number | null>(null);
   const [co2, setCo2] = useState<number | null>(null);
   const [timeWasted, setTimeWasted] = useState<number | null>(null);
   const [cost, setCost] = useState<number | null>(null);
 
+  const t = translations[language];
+  const isArabic = language === 'ar';
+
   const calculateImpact = () => {
     const numReceipts = parseInt(receipts);
     if (!isNaN(numReceipts) && numReceipts > 0) {
       setTrees(Math.round(numReceipts / RECEIPTS_PER_TREE));
-      // Convert CO2 from grams to tons and round to whole number
       setCo2(Math.round((numReceipts * CO2_PER_RECEIPT) / GRAMS_PER_TON));
       setTimeWasted(Math.round(numReceipts * SECONDS_PER_RECEIPT));
       setCost(Math.round(numReceipts * COST_PER_RECEIPT));
@@ -39,7 +46,7 @@ export const ReceiptCalculator = () => {
   };
 
   const formatNumber = (num: number): string => {
-    return num.toLocaleString();
+    return num.toLocaleString(isArabic ? 'ar-SA' : 'en-US');
   };
 
   const formatTime = (seconds: number): string => {
@@ -47,34 +54,36 @@ export const ReceiptCalculator = () => {
     const minutes = Math.floor((seconds % 3600) / 60);
     
     if (hours > 0) {
-      return `${hours} ${hours === 1 ? 'hour' : 'hours'} ${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`;
+      return isArabic
+        ? `${formatNumber(hours)} ${hours === 1 ? t.hour : t.hours} ${formatNumber(minutes)} ${minutes === 1 ? t.minute : t.minutes}`
+        : `${formatNumber(hours)} ${hours === 1 ? t.hour : t.hours} ${formatNumber(minutes)} ${minutes === 1 ? t.minute : t.minutes}`;
     }
-    return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`;
+    return `${formatNumber(minutes)} ${minutes === 1 ? t.minute : t.minutes}`;
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg">
+    <div className={`w-full max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg ${isArabic ? 'rtl' : 'ltr'}`}>
       <div className="space-y-6">
         <div className="text-center space-y-2">
           <h1 className="text-2xl font-semibold text-app-blue-dark">
-            Paper Receipt Impact
+            {t.title}
           </h1>
           <p className="text-sm text-neutral">
-            Calculate the environmental impact of your paper receipts
+            {t.subtitle}
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <label className="text-sm font-medium text-app-blue-dark flex items-center gap-2">
-              Number of Receipts per Month
+              {t.receiptsLabel}
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger>
                     <Info className="h-4 w-4 text-neutral hover:text-app-blue transition-colors" />
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>One tree produces approximately 8,333 paper receipts</p>
+                    <p>{t.tooltipText}</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
@@ -84,7 +93,7 @@ export const ReceiptCalculator = () => {
               min="0"
               value={receipts}
               onChange={(e) => setReceipts(e.target.value)}
-              placeholder="Enter the number of receipts"
+              placeholder={t.receiptsLabel}
               className="w-full"
             />
           </div>
@@ -93,7 +102,7 @@ export const ReceiptCalculator = () => {
             type="submit"
             className="w-full bg-app-blue hover:bg-app-blue/90 text-white transition-all duration-200 transform hover:scale-[1.02]"
           >
-            Calculate Environmental Impact
+            {t.calculateButton}
           </Button>
 
           {trees !== null && (
@@ -103,9 +112,9 @@ export const ReceiptCalculator = () => {
                   <TreeDeciduous className="h-8 w-8 mt-1 flex-shrink-0" />
                   <p className="text-lg text-left">
                     <span className="font-semibold">
-                      {trees === 0 ? "Less than 1" : formatNumber(trees)}
+                      {trees === 0 ? t.lessThanOne : formatNumber(trees)}
                     </span>{" "}
-                    {trees === 1 ? "tree" : "trees"} taken down
+                    {trees === 1 ? t.treesText : t.treesTextPlural}
                   </p>
                 </div>
               </div>
@@ -115,7 +124,7 @@ export const ReceiptCalculator = () => {
                   <Gauge className="h-8 w-8 mt-1 flex-shrink-0" />
                   <p className="text-lg text-left">
                     <span className="font-semibold">{formatNumber(co2!)}</span>{" "}
-                    tons of CO2 emissions
+                    {t.co2Text}
                   </p>
                 </div>
               </div>
@@ -125,7 +134,7 @@ export const ReceiptCalculator = () => {
                   <Clock className="h-8 w-8 mt-1 flex-shrink-0" />
                   <p className="text-lg text-left">
                     <span className="font-semibold">{formatTime(timeWasted!)}</span>{" "}
-                    wasted on transactions
+                    {t.timeText}
                   </p>
                 </div>
               </div>
@@ -135,7 +144,7 @@ export const ReceiptCalculator = () => {
                   <DollarSign className="h-8 w-8 mt-1 flex-shrink-0" />
                   <p className="text-lg text-left">
                     <span className="font-semibold">${formatNumber(cost!)}</span>{" "}
-                    spent on paper receipts
+                    {t.costText}
                   </p>
                 </div>
               </div>
