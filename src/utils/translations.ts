@@ -2,7 +2,7 @@ export const translations = {
   en: {
     title: "Paper Receipt Impact",
     subtitle: "Calculate the environmental impact of your paper receipts",
-    receiptsLabel: "Number of Receipts per Month",
+    receiptsLabel: "Number of Receipts",
     tooltipText: "One tree produces approximately 8,333 paper receipts",
     calculateButton: "Calculate Environmental Impact",
     treesText: "tree taken down",
