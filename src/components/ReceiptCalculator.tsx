@@ -75,7 +75,7 @@ export const ReceiptCalculator = ({ language }: Props) => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-app-blue-dark flex items-center gap-2">
+            <label className="text-sm font-medium text-app-blue-dark flex items-center gap-2 justify-end">
               {t.receiptsLabel}
               <TooltipProvider>
                 <Tooltip>
