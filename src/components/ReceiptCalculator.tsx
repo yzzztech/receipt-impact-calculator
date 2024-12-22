@@ -18,7 +18,7 @@ export const ReceiptCalculator = () => {
   const calculateTrees = () => {
     const numReceipts = parseInt(receipts);
     if (!isNaN(numReceipts) && numReceipts > 0) {
-      setTrees(Number((numReceipts / RECEIPTS_PER_TREE).toFixed(3)));
+      setTrees(Math.round(numReceipts / RECEIPTS_PER_TREE));
     }
   };
 
@@ -70,7 +70,7 @@ export const ReceiptCalculator = () => {
             <div className="animate-fade-in p-4 bg-eco-green-light rounded-lg text-center">
               <p className="text-eco-green-dark">
                 <span className="font-semibold">
-                  {trees === 0 ? "Less than 0.001" : trees}
+                  {trees === 0 ? "Less than 1" : trees}
                 </span>{" "}
                 {trees === 1 ? "tree" : "trees"} used
               </p>
