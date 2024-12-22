@@ -16,6 +16,7 @@ const SECONDS_PER_RECEIPT = 3; // seconds wasted per receipt transaction
 const GRAMS_PER_TON = 1000000; // 1 ton = 1,000,000 grams
 const GRAMS_PER_KG = 1000; // 1 kg = 1,000 grams
 const COST_PER_RECEIPT = 0.015; // $0.015 per receipt (includes paper, ink, and maintenance)
+const USD_TO_SAR = 3.75; // Exchange rate: 1 USD = 3.75 SAR
 
 interface Props {
   language: 'en' | 'ar';
@@ -62,7 +63,7 @@ export const ReceiptCalculator = ({ language }: Props) => {
       const totalCO2Grams = numReceipts * CO2_PER_RECEIPT;
       setCo2(formatCO2(totalCO2Grams));
       setTimeWasted(Math.round(numReceipts * SECONDS_PER_RECEIPT));
-      setCost(Math.round(numReceipts * COST_PER_RECEIPT));
+      setCost(Math.round(numReceipts * COST_PER_RECEIPT * USD_TO_SAR)); // Convert USD to SAR
     }
   };
 
