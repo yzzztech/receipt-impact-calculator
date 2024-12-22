@@ -72,7 +72,7 @@ export const ReceiptCalculator = () => {
                 <span className="font-semibold">
                   {trees === 0 ? "Less than 1" : trees}
                 </span>{" "}
-                {trees === 1 ? "tree" : "trees"} used
+                {trees === 1 ? "tree" : "trees"} taken down
               </p>
             </div>
           )}
