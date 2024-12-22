@@ -27,6 +27,10 @@ export const ReceiptCalculator = () => {
     calculateTrees();
   };
 
+  const formatNumber = (num: number): string => {
+    return num.toLocaleString();
+  };
+
   return (
     <div className="w-full max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg">
       <div className="space-y-4">
@@ -75,7 +79,7 @@ export const ReceiptCalculator = () => {
             <div className="animate-fade-in p-4 bg-app-blue-light rounded-lg text-center">
               <p className="text-app-blue-dark">
                 <span className="font-semibold">
-                  {trees === 0 ? "Less than 1" : trees}
+                  {trees === 0 ? "Less than 1" : formatNumber(trees)}
                 </span>{" "}
                 {trees === 1 ? "tree" : "trees"} taken down
               </p>
