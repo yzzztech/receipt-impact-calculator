@@ -22,6 +22,11 @@ export const ReceiptCalculator = () => {
     }
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    calculateTrees();
+  };
+
   return (
     <div className="w-full max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg">
       <div className="space-y-4">
@@ -34,7 +39,7 @@ export const ReceiptCalculator = () => {
           </p>
         </div>
 
-        <div className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label className="text-sm font-medium text-app-blue-dark flex items-center gap-2">
               Number of Receipts
@@ -60,7 +65,7 @@ export const ReceiptCalculator = () => {
           </div>
 
           <Button
-            onClick={calculateTrees}
+            type="submit"
             className="w-full bg-app-blue hover:bg-app-blue/90 text-white"
           >
             Calculate Impact
@@ -76,7 +81,7 @@ export const ReceiptCalculator = () => {
               </p>
             </div>
           )}
-        </div>
+        </form>
       </div>
     </div>
   );
