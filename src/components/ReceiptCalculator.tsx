@@ -166,7 +166,7 @@ export const ReceiptCalculator = ({ language }: Props) => {
                 <div className="flex items-start gap-4 text-app-blue-dark">
                   <DollarSign className="h-8 w-8 mt-1 flex-shrink-0" />
                   <p className="text-lg text-left">
-                    <span className="font-semibold">${formatNumber(cost)}</span>{" "}
+                    <span className="font-semibold">SAR {formatNumber(cost)}</span>{" "}
                     {t.costText}
                   </p>
                 </div>
