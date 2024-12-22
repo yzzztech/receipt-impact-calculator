@@ -53,9 +53,9 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         "app-blue": {
-          light: "#E6F3FF",
-          DEFAULT: "#1EAEDB",
-          dark: "#221F26",
+          light: "#E8F1F8",
+          DEFAULT: "#075AA1",
+          dark: "#12113B",
         },
         neutral: "#8E9196",
       },
