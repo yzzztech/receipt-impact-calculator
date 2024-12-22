@@ -24,8 +24,8 @@ export const ReceiptCalculator = () => {
     const numReceipts = parseInt(receipts);
     if (!isNaN(numReceipts) && numReceipts > 0) {
       setTrees(Math.round(numReceipts / RECEIPTS_PER_TREE));
-      // Convert CO2 from grams to tons and round to 3 decimal places
-      setCo2(Number(((numReceipts * CO2_PER_RECEIPT) / GRAMS_PER_TON).toFixed(3)));
+      // Convert CO2 from grams to tons and round to whole number
+      setCo2(Math.round((numReceipts * CO2_PER_RECEIPT) / GRAMS_PER_TON));
       setTimeWasted(Math.round(numReceipts * SECONDS_PER_RECEIPT));
     }
   };
