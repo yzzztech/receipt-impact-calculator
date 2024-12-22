@@ -18,10 +18,10 @@ export const translations = {
   },
   ar: {
     title: "تأثير الإيصالات الورقية",
-    subtitle: "احسب التأثير البيئي لإيصالاتك الورقية",
-    receiptsLabel: "عدد الإيصالات شهرياً",
+    subtitle: "احسب الأثر البيئي لإيصالاتك الورقية",
+    receiptsLabel: "عدد الإيصالات",
     tooltipText: "الشجرة الواحدة تنتج حوالي 8,333 إيصال ورقي",
-    calculateButton: "احسب التأثير البيئي",
+    calculateButton: "احسب الأثر البيئي",
     treesText: "شجرة تم قطعها",
     treesTextPlural: "أشجار تم قطعها",
     lessThanOne: "أقل من 1",
