@@ -33,6 +33,9 @@ const Index = () => {
         />
       </a>
       <ReceiptCalculator language={language} />
+      <footer className="mt-auto pt-8 pb-4 text-app-blue-dark/80 text-sm">
+        © 2024-2025 Wateer. All rights reserved.
+      </footer>
     </div>
   );
 };
