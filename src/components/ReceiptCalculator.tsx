@@ -31,6 +31,11 @@ export const ReceiptCalculator = ({ language }: Props) => {
   const t = translations[language];
   const isArabic = language === 'ar';
 
+  const formatNumber = (num: number | null): string => {
+    if (num === null) return "0";
+    return num.toLocaleString(isArabic ? 'ar-SA' : 'en-US');
+  };
+
   const formatCO2 = (grams: number) => {
     if (grams >= GRAMS_PER_TON) {
       return {
@@ -66,11 +71,8 @@ export const ReceiptCalculator = ({ language }: Props) => {
     calculateImpact();
   };
 
-  const formatNumber = (num: number): string => {
-    return num.toLocaleString(isArabic ? 'ar-SA' : 'en-US');
-  };
-
-  const formatTime = (seconds: number): string => {
+  const formatTime = (seconds: number | null): string => {
+    if (seconds === null) return "0";
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     
@@ -144,8 +146,8 @@ export const ReceiptCalculator = ({ language }: Props) => {
                 <div className="flex items-start gap-4 text-app-blue-dark">
                   <Gauge className="h-8 w-8 mt-1 flex-shrink-0" />
                   <p className="text-lg text-left">
-                    <span className="font-semibold">{formatNumber(co2!.value)}</span>{" "}
-                    {co2!.unit}
+                    <span className="font-semibold">{co2 ? formatNumber(co2.value) : "0"}</span>{" "}
+                    {co2?.unit || t.co2TextGrams}
                   </p>
                 </div>
               </div>
@@ -154,7 +156,7 @@ export const ReceiptCalculator = ({ language }: Props) => {
                 <div className="flex items-start gap-4 text-app-blue-dark">
                   <Clock className="h-8 w-8 mt-1 flex-shrink-0" />
                   <p className="text-lg text-left">
-                    <span className="font-semibold">{formatTime(timeWasted!)}</span>{" "}
+                    <span className="font-semibold">{formatTime(timeWasted)}</span>{" "}
                     {t.timeText}
                   </p>
                 </div>
@@ -164,7 +166,7 @@ export const ReceiptCalculator = ({ language }: Props) => {
                 <div className="flex items-start gap-4 text-app-blue-dark">
                   <DollarSign className="h-8 w-8 mt-1 flex-shrink-0" />
                   <p className="text-lg text-left">
-                    <span className="font-semibold">${formatNumber(cost!)}</span>{" "}
+                    <span className="font-semibold">${formatNumber(cost)}</span>{" "}
                     {t.costText}
                   </p>
                 </div>
