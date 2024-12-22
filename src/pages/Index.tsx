@@ -12,7 +12,7 @@ const Index = () => {
         <img 
           src="/lovable-uploads/3825e739-23c0-42ac-ac6c-90d59d129855.png" 
           alt="Wateer Logo" 
-          className="w-56 mb-8 mt-4"
+          className="w-60 mb-8 mt-4"
         />
       </a>
       <ReceiptCalculator />
