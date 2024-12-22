@@ -10,7 +10,7 @@ const Index = () => {
         className="hover:opacity-80 transition-opacity"
       >
         <img 
-          src="https://wateer.com.sa/static/images/WateerVersion4.png" 
+          src="/lovable-uploads/3825e739-23c0-42ac-ac6c-90d59d129855.png" 
           alt="Wateer Logo" 
           className="w-48 mb-8 mt-4"
         />
