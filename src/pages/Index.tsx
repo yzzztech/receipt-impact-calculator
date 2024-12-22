@@ -3,7 +3,6 @@ import { ReceiptCalculator } from "@/components/ReceiptCalculator";
 const Index = () => {
   return (
     <div className="min-h-screen bg-app-blue-light/30 flex flex-col items-center p-4">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Receipt Impact Calculator</h1>
       <a 
         href="https://wateer.sa" 
         target="_blank" 
