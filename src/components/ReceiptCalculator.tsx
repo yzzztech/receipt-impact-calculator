@@ -49,27 +49,27 @@ export const ReceiptCalculator = () => {
 
   return (
     <div className="w-full max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg">
-      <div className="space-y-4">
+      <div className="space-y-6">
         <div className="text-center space-y-2">
           <h1 className="text-2xl font-semibold text-app-blue-dark">
             Paper Receipt Impact
           </h1>
           <p className="text-sm text-neutral">
-            Calculate your paper receipt footprint
+            Calculate the environmental impact of your paper receipts
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <label className="text-sm font-medium text-app-blue-dark flex items-center gap-2">
-              Number of Receipts
+              Number of Receipts per Month
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger>
-                    <Info className="h-4 w-4 text-neutral" />
+                    <Info className="h-4 w-4 text-neutral hover:text-app-blue transition-colors" />
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>One tree produces ~8,333 paper receipts</p>
+                    <p>One tree produces approximately 8,333 paper receipts</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
@@ -79,24 +79,24 @@ export const ReceiptCalculator = () => {
               min="0"
               value={receipts}
               onChange={(e) => setReceipts(e.target.value)}
-              placeholder="Enter number of receipts"
+              placeholder="Enter the number of receipts"
               className="w-full"
             />
           </div>
 
           <Button
             type="submit"
-            className="w-full bg-app-blue hover:bg-app-blue/90 text-white"
+            className="w-full bg-app-blue hover:bg-app-blue/90 text-white transition-all duration-200 transform hover:scale-[1.02]"
           >
-            Calculate Impact
+            Calculate Environmental Impact
           </Button>
 
           {trees !== null && (
-            <div className="animate-fade-in space-y-3">
-              <div className="p-4 bg-app-blue-light rounded-lg">
-                <div className="flex items-center justify-center gap-2 text-app-blue-dark">
-                  <TreeDeciduous className="h-5 w-5" />
-                  <p>
+            <div className="animate-fade-in space-y-4">
+              <div className="p-5 bg-app-blue-light rounded-lg hover:shadow-md transition-shadow">
+                <div className="flex items-center justify-center gap-3 text-app-blue-dark">
+                  <TreeDeciduous className="h-6 w-6" />
+                  <p className="text-lg">
                     <span className="font-semibold">
                       {trees === 0 ? "Less than 1" : formatNumber(trees)}
                     </span>{" "}
@@ -105,20 +105,20 @@ export const ReceiptCalculator = () => {
                 </div>
               </div>
 
-              <div className="p-4 bg-app-blue-light rounded-lg">
-                <div className="flex items-center justify-center gap-2 text-app-blue-dark">
-                  <Gauge className="h-5 w-5" />
-                  <p>
+              <div className="p-5 bg-app-blue-light rounded-lg hover:shadow-md transition-shadow">
+                <div className="flex items-center justify-center gap-3 text-app-blue-dark">
+                  <Gauge className="h-6 w-6" />
+                  <p className="text-lg">
                     <span className="font-semibold">{formatNumber(co2!)}</span>{" "}
                     grams of CO2 emissions
                   </p>
                 </div>
               </div>
 
-              <div className="p-4 bg-app-blue-light rounded-lg">
-                <div className="flex items-center justify-center gap-2 text-app-blue-dark">
-                  <Clock className="h-5 w-5" />
-                  <p>
+              <div className="p-5 bg-app-blue-light rounded-lg hover:shadow-md transition-shadow">
+                <div className="flex items-center justify-center gap-3 text-app-blue-dark">
+                  <Clock className="h-6 w-6" />
+                  <p className="text-lg">
                     <span className="font-semibold">{formatTime(timeWasted!)}</span>{" "}
                     wasted on transactions
                   </p>
