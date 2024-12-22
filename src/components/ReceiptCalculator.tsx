@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 const RECEIPTS_PER_TREE = 8333;
 const CO2_PER_RECEIPT = 2.5; // grams of CO2 per receipt
 const SECONDS_PER_RECEIPT = 3; // seconds wasted per receipt transaction
+const GRAMS_PER_TON = 1000000; // 1 ton = 1,000,000 grams
 
 export const ReceiptCalculator = () => {
   const [receipts, setReceipts] = useState<string>("");
@@ -23,7 +24,8 @@ export const ReceiptCalculator = () => {
     const numReceipts = parseInt(receipts);
     if (!isNaN(numReceipts) && numReceipts > 0) {
       setTrees(Math.round(numReceipts / RECEIPTS_PER_TREE));
-      setCo2(Math.round(numReceipts * CO2_PER_RECEIPT));
+      // Convert CO2 from grams to tons and round to 3 decimal places
+      setCo2(Number(((numReceipts * CO2_PER_RECEIPT) / GRAMS_PER_TON).toFixed(3)));
       setTimeWasted(Math.round(numReceipts * SECONDS_PER_RECEIPT));
     }
   };
@@ -110,7 +112,7 @@ export const ReceiptCalculator = () => {
                   <Gauge className="h-8 w-8 mt-1 flex-shrink-0" />
                   <p className="text-lg text-left">
                     <span className="font-semibold">{formatNumber(co2!)}</span>{" "}
-                    grams of CO2 emissions
+                    tons of CO2 emissions
                   </p>
                 </div>
               </div>
