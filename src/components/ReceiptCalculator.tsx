@@ -36,7 +36,7 @@ export const ReceiptCalculator = () => {
       <div className="space-y-4">
         <div className="text-center space-y-2">
           <h1 className="text-2xl font-semibold text-app-blue-dark">
-            Receipt Impact
+            Paper Receipt Impact
           </h1>
           <p className="text-sm text-neutral">
             Calculate your paper receipt footprint
