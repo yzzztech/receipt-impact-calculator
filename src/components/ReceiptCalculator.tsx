@@ -56,6 +56,13 @@ export const ReceiptCalculator = ({ language }: Props) => {
     }
   };
 
+  const resetCalculations = () => {
+    setTrees(null);
+    setCo2(null);
+    setTimeWasted(null);
+    setCost(null);
+  };
+
   const calculateImpact = () => {
     const numReceipts = parseInt(receipts);
     if (!isNaN(numReceipts) && numReceipts > 0) {
@@ -63,7 +70,9 @@ export const ReceiptCalculator = ({ language }: Props) => {
       const totalCO2Grams = numReceipts * CO2_PER_RECEIPT;
       setCo2(formatCO2(totalCO2Grams));
       setTimeWasted(Math.round(numReceipts * SECONDS_PER_RECEIPT));
-      setCost(Math.round(numReceipts * COST_PER_RECEIPT * USD_TO_SAR)); // Convert USD to SAR
+      setCost(Math.round(numReceipts * COST_PER_RECEIPT * USD_TO_SAR));
+    } else {
+      resetCalculations();
     }
   };
 
