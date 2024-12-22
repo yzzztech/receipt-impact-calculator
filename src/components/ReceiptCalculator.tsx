@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Info, TreeDeciduous, Gauge, Clock } from "lucide-react";
+import { Info, TreeDeciduous, Gauge, Clock, DollarSign } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -13,12 +13,14 @@ const RECEIPTS_PER_TREE = 8333;
 const CO2_PER_RECEIPT = 2.5; // grams of CO2 per receipt
 const SECONDS_PER_RECEIPT = 3; // seconds wasted per receipt transaction
 const GRAMS_PER_TON = 1000000; // 1 ton = 1,000,000 grams
+const COST_PER_RECEIPT = 0.015; // $0.015 per receipt (includes paper, ink, and maintenance)
 
 export const ReceiptCalculator = () => {
   const [receipts, setReceipts] = useState<string>("");
   const [trees, setTrees] = useState<number | null>(null);
   const [co2, setCo2] = useState<number | null>(null);
   const [timeWasted, setTimeWasted] = useState<number | null>(null);
+  const [cost, setCost] = useState<number | null>(null);
 
   const calculateImpact = () => {
     const numReceipts = parseInt(receipts);
@@ -27,6 +29,7 @@ export const ReceiptCalculator = () => {
       // Convert CO2 from grams to tons and round to whole number
       setCo2(Math.round((numReceipts * CO2_PER_RECEIPT) / GRAMS_PER_TON));
       setTimeWasted(Math.round(numReceipts * SECONDS_PER_RECEIPT));
+      setCost(Math.round(numReceipts * COST_PER_RECEIPT));
     }
   };
 
@@ -123,6 +126,16 @@ export const ReceiptCalculator = () => {
                   <p className="text-lg text-left">
                     <span className="font-semibold">{formatTime(timeWasted!)}</span>{" "}
                     wasted on transactions
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-5 bg-app-blue-light rounded-lg hover:shadow-md transition-shadow">
+                <div className="flex items-start gap-4 text-app-blue-dark">
+                  <DollarSign className="h-8 w-8 mt-1 flex-shrink-0" />
+                  <p className="text-lg text-left">
+                    <span className="font-semibold">${formatNumber(cost!)}</span>{" "}
+                    spent on paper receipts
                   </p>
                 </div>
               </div>
